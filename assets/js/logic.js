@@ -138,3 +138,50 @@ function endQuiz() {
     // Display the number of correct answers as the final score
     document.getElementById("final-score").textContent = correctAnswers;
 }
+
+// Function to save high score
+function saveHighScore() {
+    const initials = initialsInput.value.trim();
+  
+    if (initials !== "") {
+      // Retrieve existing highscores from localStorage or initialize an empty array
+      const existingHighscores = JSON.parse(localStorage.getItem("highscores")) || [];
+  
+      // Create a new highscore object
+      const newHighscore = {
+        initials: initials,
+        score: calculateScore(),
+      };
+  
+      // Add the new highscore to the existing highscores
+      existingHighscores.push(newHighscore);
+  
+      // Sort the highscores by score in descending order
+      existingHighscores.sort((a, b) => b.score - a.score);
+  
+      // Store the updated highscores in localStorage
+      localStorage.setItem("highscores", JSON.stringify(existingHighscores));
+  
+      // Redirect to the highscores page or handle it according to your application
+      alert("High score saved!");
+    } else {
+      alert("Please enter your initials.");
+    }
+  }
+  
+
+// Function to calculate the score based on correct answers
+function calculateScore() {
+    const correctAnswers = questions.reduce((count, question, index) => {
+      const selectedChoice = document.querySelector(`#choices button[data-index="${index}"]:checked`);
+      
+      // Check if a choice was selected and if it matches the correct answer
+      if (selectedChoice && selectedChoice.textContent === question.choices[question.correctIndex]) {
+        return count + 1;
+      } else {
+        return count;
+      }
+    }, 0);
+  
+    return correctAnswers;
+  }
