@@ -172,16 +172,14 @@ function saveHighScore() {
 
 // Function to calculate the score based on correct answers
 function calculateScore() {
-    const correctAnswers = questions.reduce((count, question, index) => {
-      const selectedChoice = document.querySelector(`#choices button[data-index="${index}"]:checked`);
-      
-      // Check if a choice was selected and if it matches the correct answer
-      if (selectedChoice && selectedChoice.textContent === question.choices[question.correctIndex]) {
-        return count + 1;
-      } else {
-        return count;
-      }
-    }, 0);
-  
-    return correctAnswers;
-  }
+  const correctAnswers = questions.reduce((count, question) => {
+    // Check if the user's choice matches the correct answer
+    if (question.userChoice === question.choices[question.correctIndex]) {
+      return count + 1;
+    } else {
+      return count;
+    }
+  }, 0);
+
+  return correctAnswers;
+}
