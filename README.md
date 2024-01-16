@@ -15,9 +15,9 @@ I was to build a timed coding quiz with multiple-choice questions. The quiz was 
 - When the game ends, it should display their score and give the user the ability to save their initials and their score
 
 The following pictures show the layout and functionality of my finished application (which appropriately resembles the Demo animation provided): 
-![Pic1](/Images/Screenshot1.png)
-![Pic2](/Images/Screenshot2.png)
-![Pic3](/Images/Screenshot3.png)
+![Pic1](/Images/Screenshot 1.png)
+![Pic2](/Images/Screenshot 2.png)
+![Pic3](/Images/Screenshot 3.png)
 
 ## Table of Contents 
 
