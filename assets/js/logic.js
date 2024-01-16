@@ -71,4 +71,48 @@ function startTimer() {
       choicesElement.appendChild(button);
     });
   }
+
+// Function to handle a choice click
+function handleChoiceClick(event) {
+    if (event.target.matches("button")) {
+      const selectedChoiceIndex = parseInt(event.target.getAttribute("data-index"));
+      const currentQuestion = questions[currentQuestionIndex];
+  
+    // Update the userChoice property of the current question
+    currentQuestion.userChoice = currentQuestion.choices[selectedChoiceIndex];
+  
+      // Check if the selected choice is correct
+      if (currentQuestion.correctIndex === selectedChoiceIndex) {
+        feedbackElement.textContent = "Correct!";
+        correctSound.play(); // Play correct sound
+      } else {
+        feedbackElement.textContent = "Wrong! -10 seconds";
+        timeRemaining -= 10;
+        incorrectSound.play(); // Play incorrect sound
+  
+        // Ensure time doesn't go negative
+        if (timeRemaining < 0) {
+          timeRemaining = 0;
+        }
+      }
+  
+      // Move to the next question
+      currentQuestionIndex++;
+  
+      // Check if there are more questions
+      if (currentQuestionIndex < questions.length) {
+        // Show feedback for a short duration
+        feedbackElement.classList.remove("hide");
+  
+        // Delay for 1 second before showing the next question
+        setTimeout(function () {
+          feedbackElement.classList.add("hide");
+          showQuestion();
+        }, 1000);
+      } else {
+        // If there are no more questions, end the quiz
+        endQuiz();
+      }
+    }
+  }
   
