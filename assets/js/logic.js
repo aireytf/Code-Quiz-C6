@@ -115,4 +115,26 @@ function handleChoiceClick(event) {
       }
     }
   }
+
+// Function to end the quiz
+function endQuiz() {
+    // Stop the timer
+    clearInterval(timerInterval);
   
+    // Calculate the number of correct answers
+    const correctAnswers = questions.reduce((count, question) => {
+      // Check if the user's choice matches the correct answer
+      if (question.userChoice === question.choices[question.correctIndex]) {
+        return count + 1;
+      } else {
+        return count;
+      }
+    }, 0);
+  
+    // Hide questions, show end screen
+    document.getElementById("questions").classList.add("hide");
+    endScreenElement.classList.remove("hide");
+  
+    // Display the number of correct answers as the final score
+    document.getElementById("final-score").textContent = correctAnswers;
+}
